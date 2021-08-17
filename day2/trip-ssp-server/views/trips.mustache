@@ -7,7 +7,11 @@
         {{#allTrips}}
 
         <li>
-            {{title}} - {{image}} - {{dateOfDeparture}} - {{dateOfReturn}}
+            <form method = "POST" action = "/delete-trip">
+                {{title}} - {{image}} - {{dateOfDeparture}} - {{dateOfReturn}}
+                <input type = "hidden" value = {{id}} name = "tripId" />
+                <button>Remove Trip</button>
+            </form>
         </li>
 
         {{/allTrips}}

@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const mustacheExpress = require('mustache-express');
 
+// using uuid
+const { v4: uuidv4 } = require('uuid');
+
 const PORT = 3000;
 
 // Set express to parse body
@@ -18,18 +21,21 @@ app.set('view engine', 'mustache');
 
 let trips = [
   {
+    id: uuidv4(),
     title: 'Chicago',
     image: 'insert image later',
     dateOfDeparture: '01/01/2021',
     dateOfReturn: '01/11/2021'
   },
   {
+    id: uuidv4(),
     title: 'Washington D.C.',
     image: 'insert image later',
     dateOfDeparture: '02/01/2021',
     dateOfReturn: '02/11/2021'
   },
   {
+    id: uuidv4(),
     title: 'New York',
     image: 'insert image later',
     dateOfDeparture: '03/01/2021',
@@ -65,6 +71,7 @@ app.post('/add-trip', (req, res) => {
   const dateOfReturn = req.body.tripDateOfReturn;
 
   const trip = {
+    id: uuidv4(),
     title: title,
     image: 'insert image later',
     dateOfDeparture: dateOfDeparture,
@@ -72,6 +79,16 @@ app.post('/add-trip', (req, res) => {
   };
 
   trips.push(trip);
+
+  res.redirect('/trips');
+});
+
+app.post('/delete-trip', (req, res) => {
+  const tripId = parseInt(req.body.tripId);
+
+  trips = trips.filter((trip) => {
+    return trip.id != tripId;
+  });
 
   res.redirect('/trips');
 });
