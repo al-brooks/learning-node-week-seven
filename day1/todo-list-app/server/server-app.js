@@ -46,14 +46,21 @@ app.post('/todos', (req, res) => {
   res.json({ success: true, message: 'To-Do item has been added to list' });
 });
 
-// app.delete('/todos/delete-item/:id', (req, res) => {
-//   const itemId = req.params.id;
-//   const removeId = todos.filter(id => {
-//     if(itemId = id) {
-//       return id;
-//     }
-//   })
-// });
+// passes  Logic for Delete works
+app.delete('/todos/:id', (req, res) => {
+  const delId = parseInt(req.params.id);
+
+  todos = todos.filter((todo) => {
+    return todo.id != delId;
+  });
+
+  res.send({ success: true, msg: 'item has successfully been deleted' });
+
+  // note:  This works if the IDs are unique...
+  // ...However since the IDs are based on array length, that can cause...
+  // ...Ids to overlap between tasks (This specific example)
+  // ...And you'll accidentally delete multiple tasks
+});
 
 app.listen(3000, () => {
   console.log('Server is running...');
