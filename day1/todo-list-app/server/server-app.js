@@ -12,23 +12,7 @@ app.use(cors());
 // node app.js runs this server file
 // ctrl c to quit
 
-let todos = [
-  {
-    title: 'Walk Dog',
-    priority: 'Very Important',
-    dateCreated: '8/16/21'
-  },
-  {
-    title: 'Grocery Shopping',
-    priority: 'Important',
-    dateCreated: '8/15/21'
-  },
-  {
-    title: 'Do Laundry',
-    priority: 'When You Have Time',
-    dateCreated: '8/14/21'
-  }
-];
+let todos = [];
 
 // Middleware
 app.use(express.json());
@@ -48,13 +32,28 @@ app.post('/todos', (req, res) => {
   const title = req.body.title;
   const priority = req.body.priority;
   const dateCreated = req.body.dateCreated;
+  const id = todos.length + 1;
 
-  const todo = { title: title, priority: priority, dateCreated: dateCreated };
+  const todo = {
+    id: id,
+    title: title,
+    priority: priority,
+    dateCreated: dateCreated
+  };
 
   todos.push(todo);
 
   res.json({ success: true, message: 'To-Do item has been added to list' });
 });
+
+// app.delete('/todos/delete-item/:id', (req, res) => {
+//   const itemId = req.params.id;
+//   const removeId = todos.filter(id => {
+//     if(itemId = id) {
+//       return id;
+//     }
+//   })
+// });
 
 app.listen(3000, () => {
   console.log('Server is running...');

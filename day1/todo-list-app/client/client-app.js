@@ -8,7 +8,8 @@ function getFullList() {
     .then((response) => response.json())
     .then((items) => {
       const listItems = items.map((item) => {
-        return `<li>${item.title} - ${item.priority} - ${item.dateCreated}</li>`;
+        console.log(item.id);
+        return `<li>${item.title} - ${item.priority} - ${item.dateCreated} <button onclick="deleteTask();">x</button></li>`;
       });
       todoList.innerHTML = listItems.join('');
     });
