@@ -84,7 +84,7 @@ app.post('/add-trip', (req, res) => {
 });
 
 app.post('/delete-trip', (req, res) => {
-  const tripId = parseInt(req.body.tripId);
+  const tripId = req.body.tripId;
 
   trips = trips.filter((trip) => {
     return trip.id != tripId;

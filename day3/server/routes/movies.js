@@ -26,7 +26,7 @@ router.post('/create', (req, res) => {
 });
 
 router.post('/delete', (req, res) => {
-  const movieId = parseInt(req.body.id);
+  const movieId = req.body.id;
 
   movies = movies.filter((movie) => {
     return movie.id != movieId;
