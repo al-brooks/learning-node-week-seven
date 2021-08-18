@@ -1,4 +1,5 @@
 const express = require('express');
+const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -6,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
-  let id = movies.length + 1;
+  let id = uuidv4();
   let name = req.body.name;
   let details = req.body.details;
   let genre = req.body.genre;
@@ -21,6 +22,16 @@ router.post('/create', (req, res) => {
   };
 
   movies.push(movie);
+  res.redirect('/movies');
+});
+
+router.post('/delete', (req, res) => {
+  const movieId = parseInt(req.body.id);
+
+  movies = movies.filter((movie) => {
+    return movie.id != movieId;
+  });
+
   res.redirect('/movies');
 });
 

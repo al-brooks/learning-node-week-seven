@@ -10,6 +10,10 @@
                     <div class = "movieList">
                         <span>{{name}}</span>
                         <img src = "{{posterUrl}}" />
+                        <form method="POST" action="/movies/delete">
+                            <input type="hidden" value="{{id}}" name="id" />
+                            <button>remove</button>
+                        </form>
                     </div>
                 {{/movies}}
             </section>
