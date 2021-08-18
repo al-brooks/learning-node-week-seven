@@ -12,6 +12,7 @@ const moviesRouter = require('./routes/movies');
 
 global.movies = [
   {
+    id: '1',
     name: 'The Matrix',
     details: 'Iconic',
     genre: 'Sci-fi',
@@ -19,6 +20,7 @@ global.movies = [
       'https://cdn.shopify.com/s/files/1/1057/4964/products/the-matrix-vintage-movie-poster-original-1-sheet-27x41-5184.jpg?v=1622610141'
   },
   {
+    id: '2',
     name: 'My Cousin Vinny',
     details: 'Classic',
     genre: 'Comedy',
@@ -26,6 +28,7 @@ global.movies = [
       'https://lumiere-a.akamaihd.net/v1/images/image_777abb36.jpeg?region=0%2C0%2C1785%2C2063'
   },
   {
+    id: '3',
     name: 'Into the Spiderverse',
     details: 'Comic Book Movie Gold Standard',
     genre: 'Action',
@@ -33,6 +36,7 @@ global.movies = [
       'https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_.jpg'
   },
   {
+    id: '4',
     name: 'Creed',
     details: 'Boxing Classic',
     genre: 'Action',
@@ -40,6 +44,7 @@ global.movies = [
       'https://cdn.shopify.com/s/files/1/1416/8662/products/creed_2015_advance_original_film_art_b147855a-61dd-49c3-a519-fcddc59fb2ff_1200x.jpg?v=1613590673'
   },
   {
+    id: '5',
     name: 'Mulan',
     details: `One of Disney's Best`,
     genre: 'Family',
@@ -49,6 +54,7 @@ global.movies = [
 ];
 
 app.use('/movies', moviesRouter);
+app.use('/css', express.static('css'));
 
 app.get('/', (req, res) => {
   res.render('index');

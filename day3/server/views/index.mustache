@@ -1,16 +1,28 @@
 <html>
-    <head></head>
+    <head>
+    <link rel="stylesheet" href="/css/movies-styles.css" />
+    </head>
     <body>
         <h1>Movies Website Assignment</h1>
-        <ul>
-        {{#movies}}
-            <li>
-                <div>
-                <span>{{name}}</span>
-                <img src = "{{posterUrl}}" />
-                </div>
-            </li>
-        {{/movies}}
-        </ul>
+        <main>
+            <section>
+                {{#movies}}
+                    <div class = "movieList">
+                        <span>{{name}}</span>
+                        <img src = "{{posterUrl}}" />
+                    </div>
+                {{/movies}}
+            </section>
+            <section>
+                <h2>Add a Movie!</h2>
+                <form method="POST" action="/movies/create">
+                    <input type="text" placeholder ="Movie Title" name = "name" />
+                    <input type="text" placeholder ="Movie Details" name = "details" />
+                    <input type="text" placeholder ="Movie Genre" name = "genre" />
+                    <input type="text" placeholder ="Movie Poster URL" name = "posterUrl" />
+                    <button>Add</button>
+                </form>
+            </section>
+        </main>
     </body>
 </html>
