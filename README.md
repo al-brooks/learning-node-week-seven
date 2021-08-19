@@ -4,6 +4,10 @@
 
 - To-Do List App
 
-## Day 2
+## Day 2 (Also includes Day 4)
 
 - Trips App
+
+## Day 3
+
+- Movie Collection App
