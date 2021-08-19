@@ -2,14 +2,26 @@ const PORT = 3000;
 const express = require('express');
 const app = express();
 const mustacheExpress = require('mustache-express');
+const session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
 
 // Set express to parse body
 app.use(express.urlencoded({ extended: true }));
 
+// Set session middleware
+app.use(
+  session({
+    secret: 'DessertForSecretKey',
+    saveUninitialized: true,
+    resave: true
+  })
+);
+
 // Set routers
 const tripsRouter = require('./routes/trips');
 app.use('/trips', tripsRouter);
+const userRouter = require('./routes/user');
+app.use('/user', userRouter);
 
 // Set mustache as template engine
 app.engine('mustache', mustacheExpress());
@@ -41,10 +53,22 @@ global.trips = [
   }
 ];
 
+global.users = [
+  { username: 'testuser1', password: 'test1' },
+  { username: 'testuser2', password: 'test2' }
+];
+
 // Root Page
 app.get('/', (req, res) => {
   let greeting = 'Welcome to my Trips App';
-  res.render('index', { greeting: greeting });
+  res.render('login', { greeting: greeting });
+});
+
+app.get('/', (req, res) => {
+  if (req.session) {
+    res.redirect('/trips');
+  }
+  res.render('login');
 });
 
 // Trips api

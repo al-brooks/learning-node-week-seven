@@ -1,0 +1,29 @@
+<html>
+<head></head>
+<body>
+<h1>{{greeting}}</h1>
+<h3>Please log-in to continue</h3>
+<section>
+    <div>
+        <h4>Log In</h4>
+        <form id="logIn" method="POST" action="/user/login">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Password"/>
+            <button>Log-In</button>
+            {{errorMessage}}
+        </form>
+    </div>
+</section>
+<section>
+    <div>
+        <h4>Sign Up!</h4>
+        <form id="signUp" method="POST" action="/user/signup">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Password"/>
+            <button>Sign-up</button>
+        </form>
+    </div>
+</section>
+
+</body>
+</html>
