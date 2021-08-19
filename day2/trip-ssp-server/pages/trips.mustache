@@ -1,0 +1,43 @@
+<html>
+<head></head>
+<body>
+    <h1>Trips</h1>
+    <main>
+        <section>
+            <div>
+                <h2>Add Trip</h2>
+                <form method = "POST" action = "/trips/add-trip">
+                    <span>Destination</span>
+                    <input 
+                        type = "text" 
+                        placeholder = "Enter Destination"
+                        name = "tripTitle" />
+                    <span>Date Of Departure</span>
+                    <input
+                        type = "text"
+                        placeholder = "MM/DD/YYYY"
+                        name = "tripDateOfDeparture" />
+                    <span>Date Of Return</span>
+                    <input
+                        type = "text"
+                        placeholder = "MM/DD/YYYY"
+                        name = "tripDateOfReturn" />
+                    <button>Save</button>
+                </form>
+            </div>
+        </section>
+        <section>
+            <div>
+                <h2>View Trips</h2>
+                {{#allTrips}}
+                    <form method = "POST" action = "/trips/delete-trip">
+                        {{title}} - {{image}} - {{dateOfDeparture}} - {{dateOfReturn}}
+                        <input type = "hidden" value = {{id}} name = "tripId" />
+                        <button>Remove Trip</button>
+                    </form>
+                {{/allTrips}}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
