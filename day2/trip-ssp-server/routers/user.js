@@ -37,7 +37,7 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/signout', (req, res) => {
-  req.session.destroy((error) => {
+  req.session.destroy(() => {
     res.redirect('/');
   });
 });

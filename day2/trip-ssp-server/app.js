@@ -21,7 +21,7 @@ app.use(
 );
 
 // Set trip router - authenticate entire router
-app.use('/trips', authenticate, tripsRouter); // passes |
+app.use('/trips', authenticate, tripsRouter);
 
 // Set user router - authenticate specific routes
 app.use('/user', userRouter);
@@ -63,7 +63,7 @@ global.users = [
 
 // Root Page
 app.get('/', (req, res) => {
-  res.render('index', { greeting: 'Welcome to Trips App' });
+  res.render('index');
 });
 
 // Trips api
