@@ -34,8 +34,12 @@ router.post('/login', (req, res) => {
       errorMessage: 'Username or password is incorrect'
     });
   }
+});
 
-  // router.post('/signout', (req, res) => {
+router.post('/signout', (req, res) => {
+  req.session.destroy((error) => {
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
