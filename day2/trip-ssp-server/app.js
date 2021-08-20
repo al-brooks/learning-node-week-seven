@@ -4,6 +4,9 @@ const app = express();
 const mustacheExpress = require('mustache-express');
 const session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
+const authenticate = require('./authentication/authenticate');
+const tripsRouter = require('./routers/trips');
+const userRouter = require('./routers/user');
 
 // Set express to parse body
 app.use(express.urlencoded({ extended: true }));
@@ -17,10 +20,10 @@ app.use(
   })
 );
 
-// Set routers
-const tripsRouter = require('./routes/trips');
-app.use('/trips', tripsRouter);
-const userRouter = require('./routes/user');
+// Set trip router - authenticate entire router
+app.use('/trips', authenticate, tripsRouter); // passes |
+
+// Set user router - authenticate specific routes
 app.use('/user', userRouter);
 
 // Set mustache as template engine
@@ -60,15 +63,7 @@ global.users = [
 
 // Root Page
 app.get('/', (req, res) => {
-  let greeting = 'Welcome to my Trips App';
-  res.render('login', { greeting: greeting });
-});
-
-app.get('/', (req, res) => {
-  if (req.session) {
-    res.redirect('/trips');
-  }
-  res.render('login');
+  res.render('index', { greeting: 'Welcome to Trips App' });
 });
 
 // Trips api

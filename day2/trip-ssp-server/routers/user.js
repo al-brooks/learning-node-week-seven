@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
+const authenticate = require('../authentication/authenticate');
 
-router.get('/', (req, res) => {
-  if (req.session.username) {
-    res.render('useraccount', { username: req.session.username });
-  } else {
-    res.render('login');
-  }
+router.get('/', authenticate, (req, res) => {
+  const username = req.session.username;
+  res.render('useraccount', { username: username });
 });
 
 router.post('/signup', (req, res) => {
@@ -18,7 +16,7 @@ router.post('/signup', (req, res) => {
 
   // session
   req.session.username = username;
-  res.render('useraccount', { username: username });
+  res.redirect('/user');
 });
 
 router.post('/login', (req, res) => {
@@ -29,18 +27,15 @@ router.post('/login', (req, res) => {
   });
 
   if (authUser) {
-    if (req.session) {
-      req.session.username = authUser.username;
-    }
-
-    res.render('useraccount', { username: authUser.username });
+    req.session.username = authUser.username;
+    res.redirect('/user');
   } else {
-    res.render('login', { errorMessage: 'Username or password is incorrect' });
+    res.render('login', {
+      errorMessage: 'Username or password is incorrect'
+    });
   }
+
+  // router.post('/signout', (req, res) => {
 });
-
-// router.post('/signout', (req, res) => {
-
-// })
 
 module.exports = router;
