@@ -26,6 +26,9 @@ app.use('/trips', authenticate, tripsRouter);
 // Set user router - authenticate specific routes
 app.use('/user', userRouter);
 
+// Set static resources - for css styling and async js requests
+app.use(express.static('static-resources'));
+
 // Set mustache as template engine
 app.engine('mustache', mustacheExpress());
 app.set('views', './pages');
