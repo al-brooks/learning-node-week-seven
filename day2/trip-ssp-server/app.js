@@ -1,6 +1,7 @@
 const PORT = 3000;
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const mustacheExpress = require('mustache-express');
 const session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // Set session middleware
 app.use(
   session({
-    secret: 'DessertForSecretKey',
+    secret: process.env.SECRET_KEY,
     saveUninitialized: true,
     resave: true
   })
